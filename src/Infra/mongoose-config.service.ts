@@ -13,6 +13,7 @@ export class MongooseConfigService implements MongooseConfigService {
         const db = this.configService.get("DATABASE_NAME");
 
         const uri = `mongodb+srv://${userName}:${password}@${host}/${db}?retryWrites=true&w=majority`;
+        console.log(uri)
         return {uri};
         
     }

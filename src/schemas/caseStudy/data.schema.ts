@@ -1,27 +1,28 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 @Schema({
   timestamps: true,
   versionKey: false,
 })
-export class CaseStudyData {
-  @Prop({ required: true })
-  bannerImg: string[];
+export class CaseStudyData extends Document{
+  @Prop({ required: true, type: Object })
+  heading: Heading;
 
-  @Prop({ required: true })
-  heading: string;
-
-  @Prop({ required: true })
-  titile: string;
-
-  @Prop({ required: true })
-  year: string;
-
-  @Prop({ required: true })
-  info: string;
+  @Prop({ required: true, type: Object })
+  problem: DataImg;
 
   @Prop({ required: true })
   ourVisionData: string;
+
+  @Prop({ required: true, type: Object })
+  features: DataImgHeading;
+
+  @Prop({ required: true, type: Object })
+  implementation: DataImg;
+
+  @Prop({ required: true, type: Object })
+  exploration: DataImg;
 
   @Prop({ required: true })
   researchData: string[];
@@ -36,15 +37,36 @@ export class CaseStudyData {
   summary: string;
 }
 
+interface DataImg {
+  detail: string;
+  image: string[];
+}
+
+interface DataImgHeading {
+  detail: string;
+  image: string[];
+}
+
+interface Heading {
+  heading: { string: string[] };
+  titile: string;
+  subtitle: string;
+  year: string;
+  details: string;
+  role: string;
+  team: string[];
+  responsibility: string[];
+}
+
 export const CASE_STUDY_MODEL = CaseStudyData.name;
 
-export type CasesStudyDocument = CaseStudyData & Document;
+export type CasesStudyDocument = CaseStudyData;
 
 export const DataSchema = SchemaFactory.createForClass(CaseStudyData);
 
 /**
   
- * {
+{
     heading : { bannerImage:[url, url],
     subtitle: string,
     year : string,
@@ -60,8 +82,7 @@ export const DataSchema = SchemaFactory.createForClass(CaseStudyData);
     implementation:{data:string, image:string[]}
     exploration:{data:string, image:string[url, url]}
     opportunity : string[],
-    result : string[],
-    summary : string[],
+    result : string,
+    summary : strin,
 }
-
 */

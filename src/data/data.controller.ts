@@ -14,17 +14,25 @@ export class DataController {
   constructor(private readonly dataService: DataService) {}
 
   @Post()
-  create(@Body() createCaseStudy) {}
+  create(@Body() createCaseStudy) {
+    return this.dataService.create(createCaseStudy);
+  }
 
   @Get()
-  findAll() {}
+  findAll() {
+    this.dataService.findAll();
+  }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {}
+  findOne(@Param('id') id: string) {
+    this.dataService.findOne(id);
+  }
 
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto) {}
 
   @Delete(':id')
-  delete(@Param('id') id: string) {}
+  delete(@Param('id') id: string) {
+    return this.dataService.delete(id);
+  }
 }
