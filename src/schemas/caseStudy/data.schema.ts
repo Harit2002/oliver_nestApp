@@ -1,28 +1,30 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
+import { HeadingDto } from 'src/dto/headingDto';
+import { DataImageDto } from 'src/dto/dataImgDto';
 
 @Schema({
   timestamps: true,
   versionKey: false,
 })
-export class CaseStudyData extends Document{
-  @Prop({ required: true, type: Object })
-  heading: Heading;
+export class CaseStudyData extends Document {
+  @Prop({ required: true, type: HeadingDto })
+  heading: HeadingDto;
 
-  @Prop({ required: true, type: Object })
-  problem: DataImg;
+  @Prop({ required: true, type: DataImageDto })
+  problem: DataImageDto;
 
   @Prop({ required: true })
   ourVisionData: string;
 
-  @Prop({ required: true, type: Object })
-  features: DataImgHeading;
+  @Prop({ required: true, type: DataImageDto })
+  features: DataImageDto;
 
-  @Prop({ required: true, type: Object })
-  implementation: DataImg;
+  @Prop({ required: true, type: DataImageDto })
+  implementation: DataImageDto;
 
-  @Prop({ required: true, type: Object })
-  exploration: DataImg;
+  @Prop({ required: true, type: DataImageDto })
+  exploration: DataImageDto;
 
   @Prop({ required: true })
   researchData: string[];
@@ -35,27 +37,6 @@ export class CaseStudyData extends Document{
 
   @Prop({ required: true })
   summary: string;
-}
-
-interface DataImg {
-  detail: string;
-  image: string[];
-}
-
-interface DataImgHeading {
-  detail: string;
-  image: string[];
-}
-
-interface Heading {
-  heading: { string: string[] };
-  titile: string;
-  subtitle: string;
-  year: string;
-  details: string;
-  role: string;
-  team: string[];
-  responsibility: string[];
 }
 
 export const CASE_STUDY_MODEL = CaseStudyData.name;

@@ -1,31 +1,46 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CardDataService } from './card-data.service';
+import { CardDto } from 'src/dto/cardDto';
 
 @Controller('card-data')
 export class CardDataController {
   constructor(private readonly cardService: CardDataService) {}
 
   @Get('/work')
-  getAllWorkCards() {}
+  getAllWorkCards() {
+    return this.cardService.getAllWorkCards();
+  }
 
   @Get('/play')
-  getAllPlayCards() {}
+  getAllPlayCards() {
+    return this.cardService.getAllPlayCards();
+  }
 
   @Post('/work')
-  postWorkCards() {}
+  postWorkCards(@Body() cardDto : CardDto) {
+    return this.cardService.postWorkCards(cardDto);
+  }
 
   @Post('/play')
-  postPlayCards() {}
+  postPlayCards(@Body() cardDto : CardDto) {
+    return this.cardService.postPlayCards(cardDto);
+  }
 
-  @Put('/work')
-  updataWorkCards() {}
+  @Put('/:id')
+  updateCards(@Param('id') id: string, @Body() updateCardDto: any) {
+    return this.cardService.updateCards(id, updateCardDto);
+  }
 
-  @Put('/play')
-  updatePlayCards() {}
-
-  @Delete('/work')
-  delteWorkCards() {}
-
-  @Delete('/play')
-  deletePlayCards() {}
+  @Delete('/:id')
+  delteCards(@Param('id') id: string) {
+    return this.cardService.delteCard(id);
+  }
 }

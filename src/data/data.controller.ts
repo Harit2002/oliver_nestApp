@@ -8,13 +8,14 @@ import {
   Put,
 } from '@nestjs/common';
 import { DataService } from './data.service';
+import { CaseStudyDto } from 'src/dto/caseStudyDto';
 
 @Controller('caseStudy')
 export class DataController {
   constructor(private readonly dataService: DataService) {}
 
   @Post()
-  create(@Body() createCaseStudy) {
+  create(@Body() createCaseStudy : CaseStudyDto) {
     return this.dataService.create(createCaseStudy);
   }
 
@@ -29,7 +30,7 @@ export class DataController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateUserDto) {}
+  update(@Param('id') id: string, @Body() createCaseStudy : CaseStudyDto) {}
 
   @Delete(':id')
   delete(@Param('id') id: string) {
