@@ -2,7 +2,6 @@ import { Injectable, BadRequestException, NotFoundException, UseFilters} from '@
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CaseStudyDto } from 'src/dto/caseStudyDto';
-import { HttpExceptionFilter } from 'src/exception/http-exception.filter';
 import { CASE_STUDY_MODEL, CasesStudyDocument } from 'src/schemas/caseStudy';
 @Injectable()
 export class DataService {
