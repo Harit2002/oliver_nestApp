@@ -3,10 +3,13 @@ import { AppModule } from './app.module';
 import * as cors from 'cors';
 import { DocumentBuilder } from '@nestjs/swagger';
 import { SwaggerModule } from '@nestjs/swagger/dist';
+import { ValidationPipe } from '@nestjs/common';
+import { HttpExceptionFilter } from './exception/http-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cors());
+  app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
 
   const config = new DocumentBuilder()
     .setTitle('Oliver website sample api')

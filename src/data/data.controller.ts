@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  ValidationPipe,
 } from '@nestjs/common';
 import { DataService } from './data.service';
 import { CaseStudyDto } from 'src/dto/caseStudyDto';
@@ -21,19 +22,23 @@ export class DataController {
 
   @Get()
   findAll() {
-    this.dataService.findAll();
+    return this.dataService.findAll();
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    this.dataService.findOne(id);
+    return this.dataService.findOne(id);
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() createCaseStudy : CaseStudyDto) {}
+  update(@Param('id') id: string, @Body() updateCaseStudy : CaseStudyDto) {
+    return this.update(id, updateCaseStudy);
+  }
 
   @Delete(':id')
   delete(@Param('id') id: string) {
     return this.dataService.delete(id);
   }
 }
+
+//hostinger, digitalhoster

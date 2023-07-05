@@ -1,33 +1,41 @@
-import { IsString } from 'class-validator';
+import { IsString, IsNotEmpty, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class HeadingDto {
-    @ApiProperty()
-  readonly bannerImage: string[];
+  @ApiProperty()
+  @IsNotEmpty()
+  bannerImage: string[];
 
   @IsString()
   @ApiProperty()
-  readonly titile: string;
+  @IsNotEmpty()
+  titile: string;
 
   @IsString()
   @ApiProperty()
-  readonly subtitle: string;
+  @IsNotEmpty()
+  subtitle: string;
 
   @IsString()
   @ApiProperty()
-  readonly year: string;
+  @IsNotEmpty()
+  year: string;
 
   @IsString()
   @ApiProperty()
-  readonly details: string;
+  @IsNotEmpty()
+  details: string;
 
   @IsString()
   @ApiProperty()
-  readonly role: string;
+  @IsOptional()
+  role?: string;
 
   @ApiProperty()
-  readonly team: string[];
+  @IsNotEmpty()
+  team: string[];
 
   @ApiProperty()
-  readonly responsibility: string[];
+  @IsNotEmpty()
+  responsibility: string[];
 }

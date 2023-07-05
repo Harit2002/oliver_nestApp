@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import { HeadingDto } from 'src/dto/headingDto';
 import { DataImageDto } from 'src/dto/dataImgDto';
+import { ValidateNested } from 'class-validator';
 
 @Schema({
   timestamps: true,

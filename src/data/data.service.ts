@@ -1,7 +1,8 @@
-import { Injectable, BadRequestException, NotFoundException} from '@nestjs/common';
+import { Injectable, BadRequestException, NotFoundException, UseFilters} from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { CaseStudyDto } from 'src/dto/caseStudyDto';
+import { HttpExceptionFilter } from 'src/exception/http-exception.filter';
 import { CASE_STUDY_MODEL, CasesStudyDocument } from 'src/schemas/caseStudy';
 @Injectable()
 export class DataService {
@@ -25,19 +26,17 @@ export class DataService {
     return data;
   }
 
-  async findAllHeading() {
-    const data = await this.dataModel.find();
-    // const res = data.map(el => {
-    //   this.data
-    // })
-  }
-
   async findOne(id: string) {
     const data = await this.dataModel.findById(id);
     return data;
   }
 
-  update(id: string, updateUserDto) {}
+  async update(id: string, updateUserDto) {
+    const deletedData = await this.dataModel.findByIdAndDelete(id, updateUserDto);
+    if (!deletedData) throw new NotFoundException('Data not found');
+    return deletedData;
+  
+  }
 
   async delete(id: string) {
     const deletedData = await this.dataModel.findByIdAndDelete(id);
